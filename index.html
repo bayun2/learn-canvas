@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>circle</title>
+</head>
+<script type="text/javascript">
+ // javapig draw circle
+
+ function pig(id) {
+  var canvas = document.getElementById(id);
+  if(canvas.getContext){
+   var ctx = canvas.getContext("2d");
+   ctx.strokeStyle = "black";
+   var circle = {
+    x : 200,
+    y : 200,
+    r : 20      //最小圆的半径
+   };
+   // 画5个圆圈
+   ctx.beginPath();
+   ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, true);
+   ctx.stroke();
+
+   ctx.beginPath();
+   ctx.arc(circle.x, circle.y, circle.r+20, 0, Math.PI * 2, true);
+   ctx.stroke();
+
+   ctx.beginPath();
+   ctx.arc(circle.x, circle.y, circle.r+40, 0, Math.PI * 2, true);
+   ctx.stroke();
+
+   ctx.beginPath();
+   ctx.arc(circle.x, circle.y, circle.r+60, 0, Math.PI * 2, true);
+   ctx.stroke();
+
+   ctx.beginPath();
+   ctx.arc(circle.x, circle.y, circle.r+80, 0, Math.PI * 2, true);
+   ctx.stroke();
+
+   // 画十字线
+   var bp = 200 - Math.sqrt( 100*100/2 );
+   ctx.beginPath();
+      ctx.moveTo(bp,bp);
+   var ep = 200 + Math.sqrt( 100*100/2 );
+   ctx.lineTo(ep,ep);
+   ctx.stroke();
+   ctx.beginPath();
+      ctx.moveTo(bp,ep);
+   ctx.lineTo(ep,bp);
+   ctx.stroke();
+
+   // 画折线 四项分数分别为 100、 90 、75 、95
+
+   ctx.strokeStyle = "rgb(250,0,0)";
+   bp = 200 - Math.sqrt( 100*100/2 );
+   ctx.beginPath();
+      ctx.moveTo(bp,bp);
+   bp = 200 -  Math.sqrt( 80*80/2 );
+   ep = 200 +  Math.sqrt( 80*80/2 );
+   ctx.lineTo(bp,ep);
+
+   bp = 200 +  Math.sqrt( 75*75/2 );
+   ep = 200 +  Math.sqrt( 75*75/2 );
+   ctx.lineTo(bp,ep);
+   bp = 200 +  Math.sqrt( 75*75/2 );
+   ep = 200 +  Math.sqrt( 75*75/2 );
+   ctx.lineTo(bp,ep);
+   bp = 200 +  Math.sqrt( 95*75/2 );
+   ep = 200 -  Math.sqrt( 95*75/2 );
+   ctx.lineTo(bp,ep);
+   ctx.closePath();
+
+   ctx.stroke();
+
+  }
+ }
+
+
+</script>
+<body bgcolor="" onLoad="pig('y')">
+ <canvas style="background:#FFC" height="400" width="400" id="y"></canvas>
+
+</body>
+</html>
