@@ -3,6 +3,16 @@ import Kinetic from 'kinetic';
 
 class Index {
   constructor(config) {
+    this.defaultWidth = 440;
+    this.defaultHeight = 310;
+
+    this.k = config.containerWidth/this.defaultWidth;
+    config.containerHeight = this.defaultHeight * this.k;
+    config.scoerFontSize = 24 * this.k;
+    config.labelMargin = 10 * this.k;
+    config.labelFontSize = 20 * this.k;
+    config.scorePercentFontSize = 12 * this.k;
+    config.stepWidth = config.stepWidth * this.k;
     // 数据为0时显示一个step而不是一个点
     config.step = config.step + config.zeroStep;
     // 根据lable的字号和margin来决定雷达图从什么点开始画
@@ -62,12 +72,12 @@ class Index {
   drawData(config) {
     var points = [
       config.maxRadius,
-      config.maxRadius-config.data[0]-(config.stepWidth*config.zeroStep),
-      config.maxRadius+config.data[1]+(config.stepWidth*config.zeroStep),
+      config.maxRadius-config.data[0]*this.k-(config.stepWidth*config.zeroStep),
+      config.maxRadius+config.data[1]*this.k+(config.stepWidth*config.zeroStep),
       config.maxRadius,
       config.maxRadius,
-      config.maxRadius+config.data[2]+(config.stepWidth*config.zeroStep),
-      config.maxRadius-config.data[3]-(config.stepWidth*config.zeroStep),
+      config.maxRadius+config.data[2]*this.k+(config.stepWidth*config.zeroStep),
+      config.maxRadius-config.data[3]*this.k-(config.stepWidth*config.zeroStep),
       config.maxRadius
     ];
     var circle = new Kinetic.Circle({
@@ -227,12 +237,11 @@ class Index {
 }
 var config = {
   container: 'container',
-  containerWidth: 600,
-  containerHeight: 400,
+  containerWidth: 214,
   stepWidth: 20,
   step: 5,
   stroke: 'grey',
-  data: [20, 40, 60, 100],
+  data: [60, 20, 0, 100],
   circleRadius: 5,
   circleStroke: 'white',
   circleStrokeWidth: 2,
@@ -240,16 +249,12 @@ var config = {
   dataConcatStroke: 'green',
   dataConcatFill: 'rgba(0,255,0,0.5)',
   zeroStep: 1,
-  score: '85.67',
-  scoerFontSize: 24,
+  score: '80.56',
   scoerFontFamily: 'Calibri',
   scoerFill: 'green',
   scorePercent: '0.13%',
-  scorePercentFontSize: 12,
   scorePercentFontFamily: 'Calibri',
   scorePercentFill: 'green',
-  labelMargin: 10,
-  labelFontSize: 20,
   labelFontFamily: 'Calibri',
   labelFill: 'grey',
   profitability: '盈利能力',
